@@ -25,6 +25,10 @@ public class TestJpa extends BaseTransactionalTest {
         user.setRoleId("admin");
         user.setStorageQuota(10L);
         String id = userDao.create(user, "me");
+        userDao.getById(id); 
+        userDao.getClass();
+        userDao.getGlobalStorageCurrent();
+        // userDao.updateQuota(user);
         
         TransactionUtil.commit();
 
@@ -36,4 +40,6 @@ public class TestJpa extends BaseTransactionalTest {
         // Authenticate using the database
         Assert.assertNotNull(new InternalAuthenticationHandler().authenticate("username", "12345678"));
     }
+
+
 }
