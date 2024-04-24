@@ -207,7 +207,7 @@ import java.util.*;
 <span class="nc bnc" id="L207" title="All 4 branches missed.">            if (criteria.getUserId() != null &amp;&amp; o[i] != null) {</span>
 <span class="nc" id="L208">                userGroupDtoList.add(groupDto);</span>
             }
-        }
+<span class="nc" id="L210">        }</span>
         
         // Post-query filtering for recursive groups
 <span class="nc bnc" id="L213" title="All 4 branches missed.">        if (criteria.getUserId() != null &amp;&amp; criteria.isRecursive()) {</span>
@@ -215,7 +215,7 @@ import java.util.*;
 <span class="nc bnc" id="L215" title="All 2 branches missed.">            for (GroupDto userGroupDto : userGroupDtoList) {</span>
 <span class="nc" id="L216">                filteredGroupDtoSet.add(userGroupDto); // Direct group</span>
 <span class="nc" id="L217">                findGroupParentHierarchy(filteredGroupDtoSet, groupDtoList, userGroupDto, 0); // Indirect groups</span>
-            }
+<span class="nc" id="L218">            }</span>
 <span class="nc" id="L219">            groupDtoList = new ArrayList&lt;&gt;(filteredGroupDtoSet);</span>
         }
         
@@ -240,7 +240,7 @@ import java.util.*;
 <span class="nc" id="L240">                parentGroupDtoSet.add(groupDto); // Add parent</span>
 <span class="nc" id="L241">                findGroupParentHierarchy(parentGroupDtoSet, groupDtoList, groupDto, depth + 1); // Find parent's parents</span>
             }
-        }
+<span class="nc" id="L243">        }</span>
 <span class="nc" id="L244">    }</span>
     
     /**

@@ -45,7 +45,7 @@ import java.util.*;
 <span class="nc" id="L45">            String fromDocId = (String) o[i];</span>
 <span class="nc" id="L46">            relationDto.setSource(documentId.equals(fromDocId));</span>
 <span class="nc" id="L47">            relationDtoList.add(relationDto);</span>
-        }
+<span class="nc" id="L48">        }</span>
 <span class="nc" id="L49">        return relationDtoList;</span>
     }
     
@@ -69,7 +69,7 @@ import java.util.*;
 <span class="nc bnc" id="L69" title="All 2 branches missed.">            if (!documentIdSet.contains(relation.getToDocumentId())) {</span>
 <span class="nc" id="L70">                relation.setDeleteDate(new Date());</span>
             }
-        }
+<span class="nc" id="L72">        }</span>
         
         // Adding new relations
 <span class="nc bnc" id="L75" title="All 2 branches missed.">        for (String targetDocId : documentIdSet) {</span>
@@ -79,7 +79,7 @@ import java.util.*;
 <span class="nc" id="L79">                    found = true;</span>
 <span class="nc" id="L80">                    break;</span>
                 }
-            }
+<span class="nc" id="L82">            }</span>
             
 <span class="nc bnc" id="L84" title="All 2 branches missed.">            if (!found) {</span>
 <span class="nc" id="L85">                Relation relation = new Relation();</span>
@@ -88,7 +88,7 @@ import java.util.*;
 <span class="nc" id="L88">                relation.setToDocumentId(targetDocId);</span>
 <span class="nc" id="L89">                em.persist(relation);</span>
             }
-        }
+<span class="nc" id="L91">        }</span>
 <span class="nc" id="L92">    }</span>
 }
 

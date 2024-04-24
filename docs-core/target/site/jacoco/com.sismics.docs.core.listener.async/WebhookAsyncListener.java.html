@@ -83,7 +83,7 @@ import java.util.List;
 <span class="nc" id="L83">            List&lt;WebhookDto&gt; webhookDtoList = webhookDao.findByCriteria(new WebhookCriteria().setEvent(event), null);</span>
 <span class="nc bnc" id="L84" title="All 2 branches missed.">            for (WebhookDto webhookDto : webhookDtoList) {</span>
 <span class="nc" id="L85">                webhookUrlList.add(webhookDto.getUrl());</span>
-            }
+<span class="nc" id="L86">            }</span>
 <span class="nc" id="L87">        });</span>
 
 <span class="nc" id="L89">        RequestBody body = RequestBody.create(&quot;{\&quot;event\&quot;: \&quot;&quot; + event.name() + &quot;\&quot;, \&quot;id\&quot;: \&quot;&quot; + id + &quot;\&quot;}&quot;, JSON);</span>
@@ -97,8 +97,8 @@ import java.util.List;
 <span class="nc" id="L97">                log.info(&quot;Successfully called the webhook at: &quot; + webhookUrl + &quot; - &quot; + response.code());</span>
 <span class="nc" id="L98">            } catch (IOException e) {</span>
 <span class="nc" id="L99">                log.error(&quot;Error calling the webhook at: &quot; + webhookUrl, e);</span>
-            }
-        }
+<span class="nc" id="L100">            }</span>
+<span class="nc" id="L101">        }</span>
 <span class="nc" id="L102">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

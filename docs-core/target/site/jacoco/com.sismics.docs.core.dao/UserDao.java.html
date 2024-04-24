@@ -295,12 +295,12 @@ import java.util.*;
 <span class="nc" id="L295">                int envBcryptWorkInt = Integer.parseInt(envBcryptWork);</span>
 <span class="nc bnc" id="L296" title="All 4 branches missed.">                if (envBcryptWorkInt &gt;= 4 &amp;&amp; envBcryptWorkInt &lt;= 31) {</span>
 <span class="nc" id="L297">                    bcryptWork = envBcryptWorkInt;</span>
-<span class="nc" id="L298">                } else {</span>
+                } else {
 <span class="nc" id="L299">                    log.warn(Constants.BCRYPT_WORK_ENV + &quot; needs to be in range 4...31. Falling back to &quot; + Constants.DEFAULT_BCRYPT_WORK + &quot;.&quot;);</span>
                 }
 <span class="nc" id="L301">            } catch (NumberFormatException e) {</span>
 <span class="nc" id="L302">                log.warn(Constants.BCRYPT_WORK_ENV + &quot; needs to be a number in range 4...31. Falling back to &quot; + Constants.DEFAULT_BCRYPT_WORK + &quot;.&quot;);</span>
-            }
+<span class="nc" id="L303">            }</span>
         }
 <span class="fc" id="L305">        return BCrypt.withDefaults().hashToString(bcryptWork, password.toCharArray());</span>
     }
@@ -365,7 +365,7 @@ import java.util.*;
 <span class="nc" id="L365">                userDto.setDisableTimestamp(((Timestamp) o[i]).getTime());</span>
             }
 <span class="nc" id="L367">            userDtoList.add(userDto);</span>
-        }
+<span class="nc" id="L368">        }</span>
 <span class="nc" id="L369">        return userDtoList;</span>
     }
 

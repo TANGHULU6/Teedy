@@ -119,7 +119,7 @@ import java.util.concurrent.atomic.AtomicReference;
             // Update index with the updated file
 <span class="nc bnc" id="L120" title="All 2 branches missed.">            if (isFileCreated) {</span>
 <span class="nc" id="L121">                AppContext.getInstance().getIndexingHandler().createFile(freshFile);</span>
-<span class="nc" id="L122">            } else {</span>
+            } else {
 <span class="nc" id="L123">                AppContext.getInstance().getIndexingHandler().updateFile(freshFile);</span>
             }
 <span class="nc" id="L125">        });</span>
@@ -168,7 +168,7 @@ import java.util.concurrent.atomic.AtomicReference;
             }
 <span class="nc" id="L169">        } catch (Throwable e) {</span>
 <span class="nc" id="L170">            log.error(&quot;Unable to generate thumbnails for: &quot; + file, e);</span>
-        }
+<span class="nc" id="L171">        }</span>
 
         // Extract text content from the file
 <span class="nc" id="L174">        long startTime = System.currentTimeMillis();</span>
@@ -178,7 +178,7 @@ import java.util.concurrent.atomic.AtomicReference;
 <span class="nc" id="L178">            content = formatHandler.extractContent(event.getLanguage(), event.getUnencryptedFile());</span>
 <span class="nc" id="L179">        } catch (Throwable e) {</span>
 <span class="nc" id="L180">            log.error(&quot;Error extracting content from: &quot; + file, e);</span>
-        }
+<span class="nc" id="L181">        }</span>
 <span class="nc" id="L182">        log.info(MessageFormat.format(&quot;File content extracted in {0}ms: &quot; + file.getId(), System.currentTimeMillis() - startTime));</span>
 
 <span class="nc" id="L184">        return content;</span>

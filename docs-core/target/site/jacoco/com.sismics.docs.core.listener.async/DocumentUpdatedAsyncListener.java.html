@@ -53,7 +53,7 @@ import java.util.List;
 <span class="nc" id="L53">            List&lt;File&gt; fileList = fileDao.getByDocumentId(null, event.getDocumentId());</span>
 <span class="nc bnc" id="L54" title="All 2 branches missed.">            if (fileList.isEmpty()) {</span>
 <span class="nc" id="L55">                document.setFileId(null);</span>
-<span class="nc" id="L56">            } else {</span>
+            } else {
 <span class="nc" id="L57">                document.setFileId(fileList.get(0).getId());</span>
             }
 
@@ -71,7 +71,7 @@ import java.util.List;
                     // The current user is already a contributor on this document, don't do anything
 <span class="nc" id="L72">                    return;</span>
                 }
-            }
+<span class="nc" id="L74">            }</span>
 
             // Add a new contributor
 <span class="nc" id="L77">            Contributor contributor = new Contributor();</span>

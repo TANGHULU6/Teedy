@@ -48,9 +48,9 @@ public class FileService extends AbstractScheduledService {
     protected void runOneIteration() {
         try {
 <span class="fc" id="L50">            deleteTemporaryFiles();</span>
-<span class="pc" id="L51">        } catch (Throwable e) {</span>
+<span class="nc" id="L51">        } catch (Throwable e) {</span>
 <span class="nc" id="L52">            log.error(&quot;Exception during file service iteration&quot;, e);</span>
-        }
+<span class="fc" id="L53">        }</span>
 <span class="fc" id="L54">    }</span>
 
     /**

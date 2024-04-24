@@ -45,11 +45,11 @@ import java.util.List;
 <span class="nc" id="L45">            int offset = 0;</span>
 <span class="nc" id="L46">            DocumentDao documentDao = new DocumentDao();</span>
             List&lt;Document&gt; documentList;
-<span class="nc bnc" id="L48" title="All 2 branches missed.">            do {</span>
+            do {
 <span class="nc" id="L49">                documentList = documentDao.findAll(offset, 100);</span>
 <span class="nc" id="L50">                AppContext.getInstance().getIndexingHandler().createDocuments(documentList);</span>
 <span class="nc" id="L51">                offset += 100;</span>
-<span class="nc" id="L52">            } while (documentList.size() &gt; 0);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            } while (documentList.size() &gt; 0);</span>
 <span class="nc" id="L53">        });</span>
 
         // Index all files
@@ -57,11 +57,11 @@ import java.util.List;
 <span class="nc" id="L57">            int offset = 0;</span>
 <span class="nc" id="L58">            FileDao fileDao = new FileDao();</span>
             List&lt;File&gt; fileList;
-<span class="nc bnc" id="L60" title="All 2 branches missed.">            do {</span>
+            do {
 <span class="nc" id="L61">                fileList = fileDao.findAll(offset, 100);</span>
 <span class="nc" id="L62">                AppContext.getInstance().getIndexingHandler().createFiles(fileList);</span>
 <span class="nc" id="L63">                offset += 100;</span>
-<span class="nc" id="L64">            } while (fileList.size() &gt; 0);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            } while (fileList.size() &gt; 0);</span>
 <span class="nc" id="L65">        });</span>
 
 <span class="nc bnc" id="L67" title="All 2 branches missed.">        if (log.isInfoEnabled()) {</span>

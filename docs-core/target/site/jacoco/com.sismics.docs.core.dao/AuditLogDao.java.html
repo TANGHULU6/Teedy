@@ -69,7 +69,7 @@ import java.util.*;
 <span class="nc bnc" id="L69" title="All 2 branches missed.">            if (criteria.isAdmin()) {</span>
                 // For admin users, display all logs except ACL logs
 <span class="nc" id="L71">                queries.add(baseQuery + &quot; where l.LOG_CLASSENTITY_C != 'Acl' &quot;);</span>
-<span class="nc" id="L72">            } else {</span>
+            } else {
                 // Get all logs originating from the user, not necessarly on owned items
                 // Filter out ACL logs
 <span class="nc" id="L75">                queries.add(baseQuery + &quot; where l.LOG_IDUSER_C = :userId and l.LOG_CLASSENTITY_C != 'Acl' &quot;);</span>
@@ -94,7 +94,7 @@ import java.util.*;
 <span class="nc" id="L94">            auditLogDto.setType(AuditLogType.valueOf((String) o[i++]));</span>
 <span class="nc" id="L95">            auditLogDto.setMessage((String) o[i++]);</span>
 <span class="nc" id="L96">            auditLogDtoList.add(auditLogDto);</span>
-        }
+<span class="nc" id="L97">        }</span>
 
 <span class="nc" id="L99">        paginatedList.setResultList(auditLogDtoList);</span>
 <span class="nc" id="L100">    }</span>

@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
     /**
      * Singleton instance.
      */
-<span class="fc" id="L41">    private static AppContext instance;</span>
+    private static AppContext instance;
 
     /**
      * Generic asynchronous event bus.
@@ -86,11 +86,11 @@ import java.util.concurrent.TimeUnit;
 <span class="fc" id="L86">                    indexingHandler = handler;</span>
 <span class="fc" id="L87">                    break;</span>
                 }
-            }
+<span class="nc" id="L89">            }</span>
 <span class="fc" id="L90">            indexingHandler.startUp();</span>
-<span class="pc" id="L91">        } catch (Exception e) {</span>
+<span class="nc" id="L91">        } catch (Exception e) {</span>
 <span class="nc" id="L92">            log.error(&quot;Error starting the indexing handler&quot;, e);</span>
-        }
+<span class="fc" id="L93">        }</span>
 
         // Start file service
 <span class="fc" id="L96">        fileService = new FileService();</span>
@@ -174,8 +174,8 @@ import java.util.concurrent.TimeUnit;
         } else {
 <span class="nc" id="L175">            int threadCount = Math.max(Runtime.getRuntime().availableProcessors() / 2, 2);</span>
 <span class="nc" id="L176">            ThreadPoolExecutor executor = new ThreadPoolExecutor(threadCount, threadCount,</span>
-<span class="nc" id="L177">                    1L, TimeUnit.MINUTES,</span>
-<span class="nc" id="L178">                    new LinkedBlockingQueue&lt;&gt;());</span>
+                    1L, TimeUnit.MINUTES,
+                    new LinkedBlockingQueue&lt;&gt;());
 <span class="nc" id="L179">            asyncExecutorList.add(executor);</span>
 <span class="nc" id="L180">            return new AsyncEventBus(executor);</span>
         }
@@ -190,7 +190,7 @@ import java.util.concurrent.TimeUnit;
 <span class="nc" id="L190">        int queueSize = 0;</span>
 <span class="nc bnc" id="L191" title="All 2 branches missed.">        for (ThreadPoolExecutor executor : asyncExecutorList) {</span>
 <span class="nc" id="L192">            queueSize += executor.getTaskCount() - executor.getCompletedTaskCount();</span>
-        }
+<span class="nc" id="L193">        }</span>
 <span class="nc" id="L194">        return queueSize;</span>
     }
 
@@ -222,8 +222,8 @@ import java.util.concurrent.TimeUnit;
 <span class="nc" id="L222">                executor.awaitTermination(1, TimeUnit.MINUTES);</span>
 <span class="nc" id="L223">            } catch (InterruptedException e) {</span>
                 // NOP
-            }
-        }
+<span class="nc" id="L225">            }</span>
+<span class="nc" id="L226">        }</span>
 
 <span class="nc bnc" id="L228" title="All 2 branches missed.">        if (indexingHandler != null) {</span>
 <span class="nc" id="L229">            indexingHandler.shutDown();</span>

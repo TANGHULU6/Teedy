@@ -64,9 +64,9 @@ public class InboxService extends AbstractScheduledService {
     protected void runOneIteration() {
         try {
 <span class="fc" id="L66">            syncInbox();</span>
-<span class="pc" id="L67">        } catch (Throwable e) {</span>
+<span class="nc" id="L67">        } catch (Throwable e) {</span>
 <span class="nc" id="L68">            log.error(&quot;Exception during inbox synching&quot;, e);</span>
-        }
+<span class="fc" id="L69">        }</span>
 <span class="fc" id="L70">    }</span>
 
     /**
@@ -108,7 +108,7 @@ public class InboxService extends AbstractScheduledService {
                     }
 <span class="nc" id="L109">                } catch (Exception e) {</span>
                     // NOP
-                }
+<span class="nc" id="L111">                }</span>
             }
 <span class="nc" id="L113">        });</span>
 <span class="fc" id="L114">    }</span>
@@ -139,7 +139,7 @@ public class InboxService extends AbstractScheduledService {
                 }
 <span class="nc" id="L140">            } catch (Exception e) {</span>
                 // NOP
-            }
+<span class="nc" id="L142">            }</span>
         }
     }
 
@@ -169,7 +169,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc" id="L169">            properties.put(&quot;mail.imaps.connectiontimeout&quot;, 30000);</span>
 <span class="nc" id="L170">            properties.put(&quot;mail.imaps.timeout&quot;, 30000);</span>
 <span class="nc" id="L171">            properties.put(&quot;mail.imaps.writetimeout&quot;, 30000);</span>
-<span class="nc" id="L172">        } else {</span>
+        } else {
 <span class="nc" id="L173">            properties.put(&quot;mail.imap.connectiontimeout&quot;, 30000);</span>
 <span class="nc" id="L174">            properties.put(&quot;mail.imap.timeout&quot;, 30000);</span>
 <span class="nc" id="L175">            properties.put(&quot;mail.imap.writetimeout&quot;, 30000);</span>
@@ -231,7 +231,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc" id="L231">        document.setLanguage(ConfigUtil.getConfigStringValue(ConfigType.DEFAULT_LANGUAGE));</span>
 <span class="nc bnc" id="L232" title="All 2 branches missed.">        if (mailContent.getDate() == null) {</span>
 <span class="nc" id="L233">            document.setCreateDate(new Date());</span>
-<span class="nc" id="L234">        } else {</span>
+        } else {
 <span class="nc" id="L235">            document.setCreateDate(mailContent.getDate());</span>
         }
 
@@ -263,7 +263,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc bnc" id="L263" title="All 2 branches missed.">        for (EmailUtil.FileContent fileContent : mailContent.getFileContentList()) {</span>
 <span class="nc" id="L264">            FileUtil.createFile(fileContent.getName(), null, fileContent.getFile(), fileContent.getSize(),</span>
 <span class="nc" id="L265">                    document.getLanguage(), &quot;admin&quot;, document.getId());</span>
-        }
+<span class="nc" id="L266">        }</span>
 
 <span class="nc bnc" id="L268" title="All 2 branches missed.">        if (ConfigUtil.getConfigBooleanValue(ConfigType.INBOX_DELETE_IMPORTED)) {</span>
 <span class="nc" id="L269">            message.setFlag(Flags.Flag.DELETED, true);</span>
@@ -285,7 +285,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc" id="L285">        Map&lt;String, String&gt; tagsNameToId = new HashMap&lt;&gt;();</span>
 <span class="nc bnc" id="L286" title="All 2 branches missed.">        for (TagDto tagDto : tags) {</span>
 <span class="nc" id="L287">            tagsNameToId.put(tagDto.getName(), tagDto.getId());</span>
-        }
+<span class="nc" id="L288">        }</span>
 <span class="nc" id="L289">        return tagsNameToId;</span>
     }
 

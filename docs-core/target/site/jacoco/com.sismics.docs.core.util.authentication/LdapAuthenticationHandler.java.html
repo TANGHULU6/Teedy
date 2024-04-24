@@ -37,7 +37,7 @@ import java.util.UUID;
     /**
      * LDAP connection pool.
      */
-<span class="nc" id="L40">    private static LdapConnectionPool pool;</span>
+    private static LdapConnectionPool pool;
 
     /**
      * Reset the LDAP pool.
@@ -48,7 +48,7 @@ import java.util.UUID;
 <span class="nc" id="L48">                pool.close();</span>
 <span class="nc" id="L49">            } catch (Exception e) {</span>
                 // NOP
-            }
+<span class="nc" id="L51">            }</span>
         }
 <span class="nc" id="L53">        pool = null;</span>
 <span class="nc" id="L54">    }</span>
@@ -88,14 +88,14 @@ import java.util.UUID;
 <span class="nc bnc" id="L88" title="All 2 branches missed.">            if (cursor.next()) {</span>
 <span class="nc" id="L89">                userEntry = cursor.get();</span>
 <span class="nc" id="L90">                pool.getConnection().bind(userEntry.getDn(), password);</span>
-<span class="nc" id="L91">            } else {</span>
+            } else {
                 // User not found
 <span class="nc" id="L93">                return null;</span>
             }
 <span class="nc" id="L95">        } catch (Exception e) {</span>
 <span class="nc" id="L96">            log.error(&quot;Error authenticating \&quot;&quot; + username + &quot;\&quot; using the LDAP&quot;, e);</span>
 <span class="nc" id="L97">            return null;</span>
-        }
+<span class="nc" id="L98">        }</span>
 
 <span class="nc" id="L100">        UserDao userDao = new UserDao();</span>
 <span class="nc" id="L101">        User user = userDao.getActiveByUsername(username);</span>
@@ -109,7 +109,7 @@ import java.util.UUID;
 <span class="nc" id="L109">            Attribute mailAttribute = userEntry.get(&quot;mail&quot;);</span>
 <span class="nc bnc" id="L110" title="All 4 branches missed.">            if (mailAttribute == null || mailAttribute.get() == null) {</span>
 <span class="nc" id="L111">                user.setEmail(ConfigUtil.getConfigStringValue(ConfigType.LDAP_DEFAULT_EMAIL));</span>
-<span class="nc" id="L112">            } else {</span>
+            } else {
 <span class="nc" id="L113">                Value value = mailAttribute.get();</span>
 <span class="nc" id="L114">                user.setEmail(value.getString());</span>
             }
@@ -119,7 +119,7 @@ import java.util.UUID;
 <span class="nc" id="L119">            } catch (Exception e) {</span>
 <span class="nc" id="L120">                log.error(&quot;Error while creating the internal user&quot;, e);</span>
 <span class="nc" id="L121">                return null;</span>
-            }
+<span class="nc" id="L122">            }</span>
         }
 
 <span class="nc" id="L125">        return user;</span>

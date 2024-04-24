@@ -112,7 +112,7 @@ import java.util.UUID;
 <span class="nc" id="L112">                aclDto.setTargetType(AclTargetType.GROUP.name());</span>
             }
 <span class="nc" id="L114">            aclDtoList.add(aclDto);</span>
-        }
+<span class="nc" id="L115">        }</span>
 <span class="nc" id="L116">        return aclDtoList;</span>
     }
 
@@ -171,7 +171,7 @@ import java.util.UUID;
 <span class="nc" id="L171">        List&lt;Acl&gt; aclList = q.getResultList();</span>
 <span class="nc bnc" id="L172" title="All 2 branches missed.">        for (Acl acl : aclList) {</span>
 <span class="nc" id="L173">            AuditLogUtil.create(acl, AuditLogType.DELETE, userId);</span>
-        }
+<span class="nc" id="L174">        }</span>
 
         // Soft delete the ACLs
 <span class="nc" id="L177">        q = em.createQuery(&quot;update Acl a set a.deleteDate = :dateNow where a.sourceId = :sourceId and a.perm = :perm and a.targetId = :targetId and a.type = :type and a.deleteDate is null&quot;);</span>
