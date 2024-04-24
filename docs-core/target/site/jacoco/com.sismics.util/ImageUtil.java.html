@@ -52,13 +52,13 @@ import java.util.Iterator;
 
 <span class="nc" id="L53">            IIOImage iioImage = new IIOImage(image, null, null);</span>
 <span class="nc" id="L54">            writer.write(null, iioImage, iwp);</span>
-<span class="nc" id="L55">        } finally {</span>
+        } finally {
 <span class="nc bnc" id="L56" title="All 2 branches missed.">            if (imageOutputStream != null) {</span>
                 try {
 <span class="nc" id="L58">                    imageOutputStream.close();</span>
 <span class="nc" id="L59">                } catch (Exception inner) {</span>
                     // NOP
-                }
+<span class="nc" id="L61">                }</span>
             }
 <span class="nc bnc" id="L63" title="All 2 branches missed.">            if (writer != null) {</span>
 <span class="nc" id="L64">                writer.dispose();</span>
@@ -130,9 +130,9 @@ import java.util.Iterator;
 <span class="fc" id="L130">            g = (pixelRGBValue &gt;&gt; 8) &amp; 0xff;</span>
 <span class="fc" id="L131">            b = (pixelRGBValue) &amp; 0xff;</span>
 <span class="fc" id="L132">            luminance = (r * 0.299) + (g * 0.587) + (b * 0.114);</span>
-<span class="pc" id="L133">        } catch (Exception e) {</span>
+<span class="nc" id="L133">        } catch (Exception e) {</span>
             // NOP
-        }
+<span class="fc" id="L135">        }</span>
 
 <span class="fc bfc" id="L137" title="All 2 branches covered.">        return luminance &lt; luminanceCutOff;</span>
     }

@@ -59,7 +59,7 @@ import java.util.Set;
         // Check if the user is still valid
 <span class="nc bnc" id="L60" title="All 6 branches missed.">        if (user != null &amp;&amp; user.getDeleteDate() == null &amp;&amp; user.getDisableDate() == null) {</span>
 <span class="nc" id="L61">            injectAuthenticatedUser(request, user);</span>
-<span class="nc" id="L62">        } else {</span>
+        } else {
 <span class="nc" id="L63">            injectAnonymousUser(request);</span>
         }
 <span class="nc" id="L65">    }</span>
@@ -85,7 +85,7 @@ import java.util.Set;
 <span class="nc bnc" id="L85" title="All 2 branches missed.">            if (groupDto.getRoleId() != null) {</span>
 <span class="nc" id="L86">                groupRoleIdSet.add(groupDto.getRoleId());</span>
             }
-        }
+<span class="nc" id="L88">        }</span>
 <span class="nc" id="L89">        userPrincipal.setGroupIdSet(groupIdSet);</span>
 
         // Add base functions

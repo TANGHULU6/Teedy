@@ -106,13 +106,13 @@ import com.sismics.docs.core.util.jpa.PaginatedList;
 <span class="nc" id="L106">        int resultCount = 0;</span>
 <span class="nc bnc" id="L107" title="All 2 branches missed.">        for (Iterator&lt;LogEntry&gt; it = logQueue.iterator(); it.hasNext();) {</span>
 <span class="nc" id="L108">            LogEntry logEntry = it.next();</span>
-<span class="nc bnc" id="L109" title="All 4 branches missed.">            if ((minLevel == null ||  Integer.compare(logEntry.getLevel().toInt(), minLevel.toInt()) &gt;= 0) &amp;&amp;</span>
+<span class="nc bnc" id="L109" title="All 6 branches missed.">            if ((minLevel == null ||  Integer.compare(logEntry.getLevel().toInt(), minLevel.toInt()) &gt;= 0) &amp;&amp;</span>
 <span class="nc bnc" id="L110" title="All 4 branches missed.">                    (tag == null || logEntry.getTag().toLowerCase().equals(tag)) &amp;&amp;</span>
-<span class="nc bnc" id="L111" title="All 4 branches missed.">                    (message == null || logEntry.getMessage().toLowerCase().contains(message))) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                    (message == null || logEntry.getMessage().toLowerCase().contains(message))) {</span>
 <span class="nc" id="L112">                logEntryList.add(logEntry);</span>
 <span class="nc" id="L113">                resultCount++;</span>
             }
-        }
+<span class="nc" id="L115">        }</span>
         
 <span class="nc" id="L117">        int fromIndex = logEntryList.size() - list.getOffset() - list.getLimit();</span>
 <span class="nc bnc" id="L118" title="All 2 branches missed.">        if (fromIndex &lt; 0) {</span>

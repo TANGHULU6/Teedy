@@ -44,7 +44,7 @@ import java.text.MessageFormat;
             }
 <span class="nc" id="L45">        } catch (Exception e) {</span>
 <span class="nc" id="L46">            log.error(&quot;Error initializing base data directory&quot;, e);</span>
-        }
+<span class="nc" id="L47">        }</span>
         
         
         // Initialize file logger
@@ -78,7 +78,7 @@ import java.text.MessageFormat;
 <span class="nc" id="L78">            em = EMF.get().createEntityManager();</span>
 <span class="nc" id="L79">        } catch (Exception e) {</span>
 <span class="nc" id="L80">            throw new ServletException(&quot;Cannot create entity manager&quot;, e);</span>
-        }
+<span class="nc" id="L81">        }</span>
 <span class="nc" id="L82">        ThreadLocalContext context = ThreadLocalContext.get();</span>
 <span class="nc" id="L83">        context.setEntityManager(em);</span>
 <span class="nc" id="L84">        EntityTransaction tx = em.getTransaction();</span>
@@ -104,11 +104,11 @@ import java.text.MessageFormat;
 <span class="nc" id="L104">                        em.close();</span>
 <span class="nc" id="L105">                    } catch (Exception ce) {</span>
 <span class="nc" id="L106">                        log.error(&quot;Error closing entity manager&quot;, ce);</span>
-                    }
+<span class="nc" id="L107">                    }</span>
                 }
 <span class="nc" id="L109">                throw new ServletException(e);</span>
             }
-        }
+<span class="nc" id="L111">        }</span>
 
         // No error processing the request : commit / rollback the current transaction depending on the HTTP code
 <span class="nc bnc" id="L114" title="All 2 branches missed.">        if (em.isOpen()) {</span>
@@ -121,8 +121,8 @@ import java.text.MessageFormat;
 <span class="nc" id="L121">                    } catch (Exception e) {</span>
 <span class="nc" id="L122">                        log.error(&quot;Error during commit&quot;, e);</span>
 <span class="nc" id="L123">                        r.sendError(500);</span>
-                    }
-<span class="nc" id="L125">                } else {</span>
+<span class="nc" id="L124">                    }</span>
+                } else {
 <span class="nc" id="L126">                    em.getTransaction().rollback();</span>
                 }
                 
@@ -130,7 +130,7 @@ import java.text.MessageFormat;
 <span class="nc" id="L130">                    em.close();</span>
 <span class="nc" id="L131">                } catch (Exception e) {</span>
 <span class="nc" id="L132">                    log.error(&quot;Error closing entity manager&quot;, e);</span>
-                }
+<span class="nc" id="L133">                }</span>
             }
         }
 

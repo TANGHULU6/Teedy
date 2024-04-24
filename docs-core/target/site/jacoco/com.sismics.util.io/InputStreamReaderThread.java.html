@@ -38,14 +38,14 @@ public class InputStreamReaderThread extends Thread {
 <span class="nc" id="L38">                    logger.debug(String.format(name + &quot;: %s&quot;, line));</span>
                 }
             }
-<span class="pc" id="L41">        } catch (IOException x) {</span>
+<span class="nc" id="L41">        } catch (IOException x) {</span>
             // NOP
         } finally {
             try {
 <span class="fc" id="L45">                closer.close();</span>
-<span class="pc" id="L46">            } catch (Exception e) {</span>
+<span class="nc" id="L46">            } catch (Exception e) {</span>
                 // NOP
-            }
+<span class="fc" id="L48">            }</span>
         }
 <span class="fc" id="L50">    }</span>
 }

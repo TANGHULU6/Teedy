@@ -35,7 +35,7 @@ import java.io.IOException;
 <span class="nc bnc" id="L35" title="All 2 branches missed.">        if (&quot;OPTIONS&quot;.equals(request.getMethod())) {</span>
             // Handle preflight request
 <span class="nc" id="L37">            response.getWriter().print(&quot;{ \&quot;status\&quot;: \&quot;ok\&quot; }&quot;);</span>
-<span class="nc" id="L38">        } else {</span>
+        } else {
 <span class="nc" id="L39">            filterChain.doFilter(req, res);</span>
         }
 <span class="nc" id="L41">    }</span>

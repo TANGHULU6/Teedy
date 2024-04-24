@@ -25,7 +25,7 @@ import com.sismics.util.context.ThreadLocalContext;
 <span class="nc" id="L25">        Query query = em.createNativeQuery(queryParam.getQueryString());</span>
 <span class="nc bnc" id="L26" title="All 2 branches missed.">        for (Entry&lt;String, Object&gt; entry : queryParam.getParameterMap().entrySet()) {</span>
 <span class="nc" id="L27">            query.setParameter(entry.getKey(), entry.getValue());</span>
-        }
+<span class="nc" id="L28">        }</span>
 <span class="nc" id="L29">        return query;</span>
     }
     

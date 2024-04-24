@@ -28,7 +28,7 @@ import com.sismics.util.EnvironmentUtil;
 <span class="pc bpc" id="L28" title="1 of 2 branches missed.">        } else if (EnvironmentUtil.isUnitTest()) {</span>
             // For unit testing, use a temporary directory
 <span class="fc" id="L30">            baseDataDir = Paths.get(System.getProperty(&quot;java.io.tmpdir&quot;));</span>
-<span class="fc" id="L31">        } else {</span>
+        } else {
             // We are in a webapp environment and nothing is specified, use the default directory for this OS
 <span class="nc bnc" id="L33" title="All 2 branches missed.">            if (EnvironmentUtil.isUnix()) {</span>
 <span class="nc" id="L34">                baseDataDir = Paths.get(&quot;/var/docs&quot;);</span>
@@ -44,7 +44,7 @@ import com.sismics.util.EnvironmentUtil;
 <span class="nc" id="L44">                Files.createDirectories(baseDataDir);</span>
 <span class="nc" id="L45">            } catch (IOException e) {</span>
 <span class="nc" id="L46">                throw new RuntimeException(e);</span>
-            }
+<span class="nc" id="L47">            }</span>
         }
 
 <span class="fc" id="L50">        return baseDataDir;</span>
@@ -106,9 +106,9 @@ import com.sismics.util.EnvironmentUtil;
 <span class="fc bfc" id="L106" title="All 2 branches covered.">        if (!Files.isDirectory(directory)) {</span>
             try {
 <span class="fc" id="L108">                Files.createDirectories(directory);</span>
-<span class="pc" id="L109">            } catch (IOException e) {</span>
+<span class="nc" id="L109">            } catch (IOException e) {</span>
 <span class="nc" id="L110">                throw new RuntimeException(e);</span>
-            }
+<span class="fc" id="L111">            }</span>
         }
 <span class="fc" id="L113">        return directory;</span>
     }

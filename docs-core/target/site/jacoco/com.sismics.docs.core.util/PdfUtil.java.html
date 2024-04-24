@@ -111,7 +111,7 @@ import java.util.List;
 <span class="pc bpc" id="L111" title="1 of 2 branches missed.">                if (formatHandler != null) {</span>
 <span class="fc" id="L112">                    formatHandler.appendToPdf(unencryptedFile, doc, fitImageToPage, margin, memUsageSettings, closer);</span>
                 }
-            }
+<span class="fc" id="L114">            }</span>
             
 <span class="fc" id="L116">            doc.save(outputStream); // Write to the output stream</span>
 <span class="fc" id="L117">            closer.close(); // Close all remaining opened PDF</span>
@@ -132,7 +132,7 @@ import java.util.List;
 <span class="fc" id="L132">            FontFactory.registerDirectories();</span>
 <span class="nc" id="L133">        } catch (IOException e) {</span>
 <span class="nc" id="L134">            log.error(&quot;Error loading font&quot;, e);</span>
-        }
+<span class="fc" id="L135">        }</span>
 <span class="fc" id="L136">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

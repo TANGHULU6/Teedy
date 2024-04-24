@@ -35,9 +35,9 @@ import javax.persistence.EntityTransaction;
         
         try {
 <span class="fc" id="L37">            em = EMF.get().createEntityManager();</span>
-<span class="pc" id="L38">        } catch (Exception e) {</span>
+<span class="nc" id="L38">        } catch (Exception e) {</span>
 <span class="nc" id="L39">            log.error(&quot;Cannot create entity manager&quot;, e);</span>
-        }
+<span class="fc" id="L40">        }</span>
 <span class="fc" id="L41">        ThreadLocalContext context = ThreadLocalContext.get();</span>
 <span class="fc" id="L42">        context.setEntityManager(em);</span>
 <span class="fc" id="L43">        EntityTransaction tx = em.getTransaction();</span>
@@ -45,7 +45,7 @@ import javax.persistence.EntityTransaction;
         
         try {
 <span class="fc" id="L47">            runnable.run();</span>
-<span class="pc" id="L48">        } catch (Exception e) {</span>
+<span class="nc" id="L48">        } catch (Exception e) {</span>
 <span class="nc" id="L49">            ThreadLocalContext.cleanup();</span>
             
 <span class="nc" id="L51">            log.error(&quot;An exception occured, rolling back current transaction&quot;, e);</span>
@@ -60,10 +60,10 @@ import javax.persistence.EntityTransaction;
 <span class="nc" id="L60">                    em.close();</span>
 <span class="nc" id="L61">                } catch (Exception ce) {</span>
 <span class="nc" id="L62">                    log.error(&quot;Error closing entity manager&quot;, ce);</span>
-                }
+<span class="nc" id="L63">                }</span>
             }
 <span class="nc" id="L65">            return;</span>
-        }
+<span class="fc" id="L66">        }</span>
         
         // No error in the current request : commit the transaction
 <span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (em.isOpen()) {</span>
@@ -72,9 +72,9 @@ import javax.persistence.EntityTransaction;
                 
                 try {
 <span class="fc" id="L74">                    em.close();</span>
-<span class="pc" id="L75">                } catch (Exception e) {</span>
+<span class="nc" id="L75">                } catch (Exception e) {</span>
 <span class="nc" id="L76">                    log.error(&quot;Error closing entity manager&quot;, e);</span>
-                }
+<span class="fc" id="L77">                }</span>
             }
         }
 

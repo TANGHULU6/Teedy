@@ -79,7 +79,7 @@ public class DocsPDType1Font extends PDSimpleFont {
 <span class="nc" id="L79">            encoding = ZapfDingbatsEncoding.INSTANCE;</span>
 <span class="pc bpc" id="L80" title="1 of 2 branches missed.">        } else if (&quot;Symbol&quot;.equals(baseFont)) {</span>
 <span class="nc" id="L81">            encoding = SymbolEncoding.INSTANCE;</span>
-<span class="nc" id="L82">        } else {</span>
+        } else {
 <span class="fc" id="L83">            encoding = WinAnsiEncoding.INSTANCE;</span>
 <span class="fc" id="L84">            dict.setItem(COSName.ENCODING, COSName.WIN_ANSI_ENCODING);</span>
         }
@@ -98,7 +98,7 @@ public class DocsPDType1Font extends PDSimpleFont {
 <span class="nc" id="L98">                fontName = genericFont.getName();</span>
 <span class="nc" id="L99">            } catch (IOException e) {</span>
 <span class="nc" id="L100">                fontName = &quot;?&quot;;</span>
-            }
+<span class="nc" id="L101">            }</span>
 <span class="nc" id="L102">            LOG.warn(&quot;Using fallback font &quot; + fontName + &quot; for base font &quot; + getBaseFont());</span>
         }
 <span class="fc" id="L104">        isEmbedded = false;</span>
@@ -298,14 +298,14 @@ public class DocsPDType1Font extends PDSimpleFont {
 <span class="nc" id="L298">                numbers = genericFont.getFontMatrix();</span>
 <span class="nc" id="L299">            } catch (IOException e) {</span>
 <span class="nc" id="L300">                fontMatrix = DEFAULT_FONT_MATRIX;</span>
-            }
+<span class="nc" id="L301">            }</span>
 
 <span class="nc bnc" id="L303" title="All 4 branches missed.">            if (numbers != null &amp;&amp; numbers.size() == 6) {</span>
 <span class="nc" id="L304">                fontMatrix = new Matrix(</span>
 <span class="nc" id="L305">                        numbers.get(0).floatValue(), numbers.get(1).floatValue(),</span>
 <span class="nc" id="L306">                        numbers.get(2).floatValue(), numbers.get(3).floatValue(),</span>
 <span class="nc" id="L307">                        numbers.get(4).floatValue(), numbers.get(5).floatValue());</span>
-<span class="nc" id="L308">            } else {</span>
+            } else {
 <span class="nc" id="L309">                return super.getFontMatrix();</span>
             }
         }

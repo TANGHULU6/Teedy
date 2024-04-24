@@ -54,9 +54,9 @@ public final class EMF {
             
 <span class="fc" id="L55">            emfInstance = Persistence.createEntityManagerFactory(&quot;transactions-optional&quot;, getEntityManagerProperties());</span>
             
-<span class="pc" id="L57">        } catch (Throwable t) {</span>
+<span class="nc" id="L57">        } catch (Throwable t) {</span>
 <span class="nc" id="L58">            log.error(&quot;Error creating EMF&quot;, t);</span>
-        }
+<span class="fc" id="L59">        }</span>
 <span class="fc" id="L60">    }</span>
     
     private static Map&lt;Object, Object&gt; getEntityManagerProperties() {
@@ -73,7 +73,7 @@ public final class EMF {
             }
 <span class="nc" id="L74">        } catch (IOException | IllegalArgumentException e) {</span>
 <span class="nc" id="L75">            log.error(&quot;Error reading hibernate.properties&quot;, e);</span>
-        }
+<span class="nc" id="L76">        }</span>
         
         // Use environment parameters
 <span class="nc" id="L79">        String databaseUrl = System.getenv(&quot;DATABASE_URL&quot;);</span>
@@ -89,7 +89,7 @@ public final class EMF {
 <span class="nc" id="L89">            props.put(&quot;hibernate.dialect&quot;, &quot;org.hibernate.dialect.HSQLDialect&quot;);</span>
 <span class="nc" id="L90">            props.put(&quot;hibernate.connection.url&quot;, &quot;jdbc:h2:file:&quot; + dbFile + &quot;;CACHE_SIZE=65536;LOCK_TIMEOUT=10000&quot;);</span>
 <span class="nc" id="L91">            props.put(&quot;hibernate.connection.username&quot;, &quot;sa&quot;);</span>
-<span class="nc" id="L92">        } else {</span>
+        } else {
 <span class="nc" id="L93">            props.put(&quot;hibernate.connection.driver_class&quot;, &quot;org.postgresql.Driver&quot;);</span>
 <span class="nc" id="L94">            props.put(&quot;hibernate.dialect&quot;, &quot;org.hibernate.dialect.PostgreSQL94Dialect&quot;);</span>
 <span class="nc" id="L95">            props.put(&quot;hibernate.connection.url&quot;, databaseUrl);</span>

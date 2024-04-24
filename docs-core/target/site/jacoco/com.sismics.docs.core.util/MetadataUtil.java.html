@@ -60,7 +60,7 @@ import java.util.Map;
                 // Remove the value
 <span class="nc" id="L61">                updateValue(documentMetadataDto.getId(), null);</span>
             }
-        }
+<span class="nc" id="L63">        }</span>
 
         // Create new values
 <span class="nc bnc" id="L66" title="All 2 branches missed.">        for (Map.Entry&lt;String, String&gt; entry : newValues.entrySet()) {</span>
@@ -71,7 +71,7 @@ import java.util.Map;
 <span class="nc" id="L71">                    metadata = metadataDto;</span>
 <span class="nc" id="L72">                    break;</span>
                 }
-            }
+<span class="nc" id="L74">            }</span>
 
 <span class="nc bnc" id="L76" title="All 2 branches missed.">            if (metadata == null) {</span>
 <span class="nc" id="L77">                throw new Exception(MessageFormat.format(&quot;Metadata not found: {0}&quot;, entry.getKey()));</span>
@@ -80,7 +80,7 @@ import java.util.Map;
             // Add the value
 <span class="nc" id="L81">            validateValue(metadata.getType(), entry.getValue());</span>
 <span class="nc" id="L82">            createValue(documentId, entry.getKey(), entry.getValue());</span>
-        }
+<span class="nc" id="L83">        }</span>
 <span class="nc" id="L84">    }</span>
 
     /**
@@ -100,21 +100,21 @@ import java.util.Map;
 <span class="nc" id="L100">                    Long.parseLong(value);</span>
 <span class="nc" id="L101">                } catch (NumberFormatException e) {</span>
 <span class="nc" id="L102">                    throw new Exception(&quot;Date value not parsable as timestamp&quot;);</span>
-                }
+<span class="nc" id="L103">                }</span>
                 break;
             case FLOAT:
                 try {
 <span class="nc" id="L107">                    Double.parseDouble(value);</span>
 <span class="nc" id="L108">                } catch (NumberFormatException e) {</span>
 <span class="nc" id="L109">                    throw new Exception(&quot;Float value not parsable&quot;);</span>
-                }
+<span class="nc" id="L110">                }</span>
                 break;
             case INTEGER:
                 try {
 <span class="nc" id="L114">                    Integer.parseInt(value);</span>
 <span class="nc" id="L115">                } catch (NumberFormatException e) {</span>
 <span class="nc" id="L116">                    throw new Exception(&quot;Integer value not parsable&quot;);</span>
-                }
+<span class="nc" id="L117">                }</span>
                 break;
         }
 <span class="nc" id="L120">    }</span>
@@ -188,9 +188,9 @@ import java.util.Map;
                         }
                     }
                 }
-            }
+<span class="nc" id="L191">            }</span>
 <span class="nc" id="L192">            metadata.add(meta);</span>
-        }
+<span class="nc" id="L193">        }</span>
 <span class="nc" id="L194">        json.add(&quot;metadata&quot;, metadata);</span>
 <span class="nc" id="L195">    }</span>
 }

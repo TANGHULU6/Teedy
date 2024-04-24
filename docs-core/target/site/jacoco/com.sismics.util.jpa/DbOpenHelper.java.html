@@ -63,11 +63,11 @@ abstract class DbOpenHelper {
         try {
             try {
 <span class="fc" id="L65">                connection = jdbcConnectionAccess.obtainConnection();</span>
-<span class="pc" id="L66">            } catch (SQLException sqle) {</span>
+<span class="nc" id="L66">            } catch (SQLException sqle) {</span>
 <span class="nc" id="L67">                exceptions.add(sqle);</span>
 <span class="nc" id="L68">                log.error(&quot;Unable to get database metadata&quot;, sqle);</span>
 <span class="nc" id="L69">                throw sqle;</span>
-            }
+<span class="fc" id="L70">            }</span>
 
             // Check if database is already created
 <span class="fc" id="L73">            Integer oldVersion = null;</span>
@@ -78,10 +78,10 @@ abstract class DbOpenHelper {
 <span class="nc" id="L78">                    String oldVersionStr = result.getString(1);</span>
 <span class="nc" id="L79">                    oldVersion = Integer.parseInt(oldVersionStr);</span>
                 }
-<span class="pc" id="L81">            } catch (Exception e) {</span>
+<span class="fc" id="L81">            } catch (Exception e) {</span>
 <span class="pc bpc" id="L82" title="1 of 2 branches missed.">                if (DialectUtil.isObjectNotFound(e.getMessage())) {</span>
 <span class="fc" id="L83">                    log.info(&quot;Unable to get database version: Table T_CONFIG not found&quot;);</span>
-<span class="fc" id="L84">                } else {</span>
+                } else {
 <span class="nc" id="L85">                    log.error(&quot;Unable to get database version&quot;, e);</span>
                 }
             } finally {
@@ -106,7 +106,7 @@ abstract class DbOpenHelper {
 <span class="fc" id="L106">            log.info(MessageFormat.format(&quot;Found database version {0}, new version is {1}, executing database incremental update scripts&quot;, oldVersion, currentVersion));</span>
 <span class="fc" id="L107">            onUpgrade(oldVersion, currentVersion);</span>
 <span class="fc" id="L108">            log.info(&quot;Database upgrade complete&quot;);</span>
-<span class="pc" id="L109">        } catch (Exception e) {</span>
+<span class="nc" id="L109">        } catch (Exception e) {</span>
 <span class="nc" id="L110">            exceptions.add(e);</span>
 <span class="nc" id="L111">            log.error(&quot;Unable to complete schema update&quot;, e);</span>
         } finally {
@@ -117,10 +117,10 @@ abstract class DbOpenHelper {
 <span class="fc" id="L117">                    stmt = null;</span>
                 }
 <span class="fc" id="L119">                jdbcConnectionAccess.releaseConnection(connection);</span>
-<span class="pc" id="L120">            } catch (Exception e) {</span>
+<span class="nc" id="L120">            } catch (Exception e) {</span>
 <span class="nc" id="L121">                exceptions.add(e);</span>
 <span class="nc" id="L122">                log.error(&quot;Unable to close connection&quot;, e);</span>
-            }
+<span class="fc" id="L123">            }</span>
         }
 <span class="fc" id="L125">    }</span>
 
@@ -143,7 +143,7 @@ abstract class DbOpenHelper {
             }
 <span class="fc" id="L144">            InputStream is = getClass().getResourceAsStream(&quot;/db/update/&quot; + fileName);</span>
 <span class="fc" id="L145">            executeScript(is);</span>
-        }
+<span class="fc" id="L146">        }</span>
 <span class="fc" id="L147">    }</span>
     
     /**
@@ -166,15 +166,15 @@ abstract class DbOpenHelper {
                 try {
 <span class="fc" id="L167">                    log.debug(formatted);</span>
 <span class="fc" id="L168">                    stmt.executeUpdate(formatted);</span>
-<span class="pc" id="L169">                } catch (SQLException e) {</span>
+<span class="nc" id="L169">                } catch (SQLException e) {</span>
 <span class="nc" id="L170">                    exceptions.add(e);</span>
 <span class="nc bnc" id="L171" title="All 2 branches missed.">                    if (log.isErrorEnabled()) {</span>
 <span class="nc" id="L172">                        log.error(&quot;Error executing SQL statement: {}&quot;, sql);</span>
 <span class="nc" id="L173">                        log.error(e.getMessage());</span>
                     }
-                }
+<span class="fc" id="L175">                }</span>
             }
-        }
+<span class="fc" id="L177">        }</span>
 <span class="fc" id="L178">    }</span>
 
     public abstract void onCreate() throws Exception;

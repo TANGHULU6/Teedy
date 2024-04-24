@@ -145,7 +145,7 @@ public final class GoogleAuthenticator {
      * Message Authentication Code). This implementation uses the SHA1 hash
      * function.
      */
-<span class="fc" id="L148">    private static final String HMAC_HASH_FUNCTION = &quot;HmacSHA1&quot;;</span>
+    private static final String HMAC_HASH_FUNCTION = &quot;HmacSHA1&quot;;
 
     /**
      * The configuration used by the current instance.
@@ -335,12 +335,12 @@ public final class GoogleAuthenticator {
 
 <span class="fc" id="L336">            int scratchCode = calculateScratchCode(scratchCodeBuffer);</span>
 
-<span class="fc bfc" id="L338" title="All 2 branches covered.">            if (scratchCode != SCRATCH_CODE_INVALID) {</span>
+<span class="pc bpc" id="L338" title="1 of 2 branches missed.">            if (scratchCode != SCRATCH_CODE_INVALID) {</span>
 <span class="fc" id="L339">                scratchCodes.add(scratchCode);</span>
-<span class="fc" id="L340">            } else {</span>
-<span class="fc" id="L341">                scratchCodes.add(generateScratchCode());</span>
+            } else {
+<span class="nc" id="L341">                scratchCodes.add(generateScratchCode());</span>
             }
-        }
+<span class="fc" id="L343">        }</span>
 
 <span class="fc" id="L345">        return scratchCodes;</span>
     }
@@ -367,10 +367,10 @@ public final class GoogleAuthenticator {
 
         // Accept the scratch code only if it has exactly
         // SCRATCH_CODE_LENGTH digits.
-<span class="fc bfc" id="L370" title="All 2 branches covered.">        if (scratchCode &gt;= SCRATCH_CODE_MODULUS / 10) {</span>
+<span class="pc bpc" id="L370" title="1 of 2 branches missed.">        if (scratchCode &gt;= SCRATCH_CODE_MODULUS / 10) {</span>
 <span class="fc" id="L371">            return scratchCode;</span>
         } else {
-<span class="fc" id="L373">            return SCRATCH_CODE_INVALID;</span>
+<span class="nc" id="L373">            return SCRATCH_CODE_INVALID;</span>
         }
     }
 
@@ -384,15 +384,15 @@ public final class GoogleAuthenticator {
      */
     private int generateScratchCode() {
         while (true) {
-<span class="fc" id="L387">            byte[] scratchCodeBuffer = new byte[BYTES_PER_SCRATCH_CODE];</span>
-<span class="fc" id="L388">            secureRandom.nextBytes(scratchCodeBuffer);</span>
+<span class="nc" id="L387">            byte[] scratchCodeBuffer = new byte[BYTES_PER_SCRATCH_CODE];</span>
+<span class="nc" id="L388">            secureRandom.nextBytes(scratchCodeBuffer);</span>
 
-<span class="fc" id="L390">            int scratchCode = calculateScratchCode(scratchCodeBuffer);</span>
+<span class="nc" id="L390">            int scratchCode = calculateScratchCode(scratchCodeBuffer);</span>
 
-<span class="pc bpc" id="L392" title="1 of 2 branches missed.">            if (scratchCode != SCRATCH_CODE_INVALID) {</span>
-<span class="fc" id="L393">                return scratchCode;</span>
+<span class="nc bnc" id="L392" title="All 2 branches missed.">            if (scratchCode != SCRATCH_CODE_INVALID) {</span>
+<span class="nc" id="L393">                return scratchCode;</span>
             }
-        }
+<span class="nc" id="L395">        }</span>
     }
 
     /**

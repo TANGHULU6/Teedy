@@ -86,16 +86,16 @@ class ReseedingSecureRandom {
 <span class="nc" id="L86">                this.secureRandom = new SecureRandom();</span>
 <span class="pc bpc" id="L87" title="1 of 2 branches missed.">            } else if (this.provider == null) {</span>
 <span class="nc" id="L88">                this.secureRandom = SecureRandom.getInstance(this.algorithm);</span>
-<span class="nc" id="L89">            } else {</span>
+            } else {
 <span class="fc" id="L90">                this.secureRandom = SecureRandom.getInstance(this.algorithm, this.provider);</span>
             }
-<span class="pc" id="L92">        } catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L92">        } catch (NoSuchAlgorithmException e) {</span>
 <span class="nc" id="L93">            throw new GoogleAuthenticatorException(String.format(&quot;Could not initialise SecureRandom with the specified algorithm: %s. &quot;</span>
-<span class="nc" id="L94">                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.algorithm, GoogleAuthenticator.RNG_ALGORITHM), e);</span>
+                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.algorithm, GoogleAuthenticator.RNG_ALGORITHM), e);
 <span class="nc" id="L95">        } catch (NoSuchProviderException e) {</span>
 <span class="nc" id="L96">            throw new GoogleAuthenticatorException(String.format(&quot;Could not initialise SecureRandom with the specified provider: %s. &quot;</span>
-<span class="nc" id="L97">                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.provider, GoogleAuthenticator.RNG_ALGORITHM_PROVIDER), e);</span>
-        }
+                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.provider, GoogleAuthenticator.RNG_ALGORITHM_PROVIDER), e);
+<span class="fc" id="L98">        }</span>
 <span class="fc" id="L99">    }</span>
 
     void nextBytes(byte[] bytes) {
@@ -105,7 +105,7 @@ class ReseedingSecureRandom {
 <span class="nc" id="L105">                    buildSecureRandom();</span>
 <span class="nc" id="L106">                    count.set(0);</span>
                 }
-            }
+<span class="nc" id="L108">            }</span>
         }
 
 <span class="fc" id="L111">        this.secureRandom.nextBytes(bytes);</span>

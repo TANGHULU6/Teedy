@@ -121,7 +121,7 @@ import java.util.*;
 <span class="nc" id="L121">            mimeType = MimeTypeUtil.guessMimeType(unencryptedFile, name);</span>
 <span class="nc" id="L122">        } catch (IOException e) {</span>
 <span class="nc" id="L123">            throw new IOException(&quot;ErrorGuessMime&quot;, e);</span>
-        }
+<span class="nc" id="L124">        }</span>
 
         // Validate user quota
 <span class="nc" id="L127">        UserDao userDao = new UserDao();</span>
@@ -156,7 +156,7 @@ import java.util.*;
 <span class="nc bnc" id="L156" title="All 2 branches missed.">            if (previousFileId == null) {</span>
                 // It's not a new version, so put it in last order
 <span class="nc" id="L158">                file.setOrder(fileDao.getByDocumentId(userId, documentId).size());</span>
-<span class="nc" id="L159">            } else {</span>
+            } else {
                 // It's a new version, update the previous version
 <span class="nc" id="L161">                File previousFile = fileDao.getActiveById(previousFileId);</span>
 <span class="nc bnc" id="L162" title="All 4 branches missed.">                if (previousFile == null || !previousFile.getDocumentId().equals(documentId)) {</span>

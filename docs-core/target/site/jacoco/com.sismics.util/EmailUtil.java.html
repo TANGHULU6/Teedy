@@ -95,7 +95,7 @@ import java.util.Map;
 <span class="nc" id="L95">            String envHostname = System.getenv(Constants.SMTP_HOSTNAME_ENV);</span>
 <span class="nc bnc" id="L96" title="All 2 branches missed.">            if (Strings.isNullOrEmpty(envHostname)) {</span>
 <span class="nc" id="L97">                email.setHostName(ConfigUtil.getConfigStringValue(ConfigType.SMTP_HOSTNAME));</span>
-<span class="nc" id="L98">            } else {</span>
+            } else {
 <span class="nc" id="L99">                email.setHostName(envHostname);</span>
             }
 
@@ -165,7 +165,7 @@ import java.util.Map;
 <span class="nc" id="L165">            email.send();</span>
 <span class="nc" id="L166">        } catch (Exception e) {</span>
 <span class="nc" id="L167">            log.error(&quot;Error sending email with template=&quot; + templateName + &quot; to user &quot; + recipientUser, e);</span>
-        }
+<span class="nc" id="L168">        }</span>
 <span class="nc" id="L169">    }</span>
 
     /**

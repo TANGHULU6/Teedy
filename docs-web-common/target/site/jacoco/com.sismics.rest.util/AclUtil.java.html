@@ -34,7 +34,7 @@ import java.util.List;
 <span class="nc" id="L34">                    .add(&quot;id&quot;, aclDto.getTargetId())</span>
 <span class="nc" id="L35">                    .add(&quot;name&quot;, JsonUtil.nullable(aclDto.getTargetName()))</span>
 <span class="nc" id="L36">                    .add(&quot;type&quot;, aclDto.getTargetType()));</span>
-        }
+<span class="nc" id="L37">        }</span>
 <span class="nc" id="L38">        json.add(&quot;acls&quot;, aclList)</span>
 <span class="nc" id="L39">                .add(&quot;writable&quot;, aclDao.checkPermission(sourceId, PermType.WRITE, targetIdList));</span>
 <span class="nc" id="L40">    }</span>
