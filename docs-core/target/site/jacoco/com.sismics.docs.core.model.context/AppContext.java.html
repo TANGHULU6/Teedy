@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AppContext.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Docs Core</a> &gt; <a href="index.source.html" class="el_package">com.sismics.docs.core.model.context</a> &gt; <span class="el_source">AppContext.java</span></div><h1>AppContext.java</h1><pre class="source lang-java linenums">package com.sismics.docs.core.model.context;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.common.eventbus.AsyncEventBus;
+import com.google.common.eventbus.EventBus;
+import com.sismics.docs.core.constant.Constants;
+import com.sismics.docs.core.dao.UserDao;
+import com.sismics.docs.core.listener.async.*;
+import com.sismics.docs.core.model.jpa.User;
+import com.sismics.docs.core.service.FileService;
+import com.sismics.docs.core.service.InboxService;
+import com.sismics.docs.core.util.PdfUtil;
+import com.sismics.docs.core.util.indexing.IndexingHandler;
+import com.sismics.util.ClasspathScanner;
+import com.sismics.util.EnvironmentUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Global application context.
+ *
+ * @author jtremeaux
+ */
+<span class="fc" id="L32">public class AppContext {</span>
+    /**
+     * Logger.
+     */
+<span class="fc" id="L36">    private static final Logger log = LoggerFactory.getLogger(AppContext.class);</span>
+
+    /**
+     * Singleton instance.
+     */
+<span class="fc" id="L41">    private static AppContext instance;</span>
+
+    /**
+     * Generic asynchronous event bus.
+     */
+    private EventBus asyncEventBus;
+
+    /**
+     * Asynchronous bus for email sending.
+     */
+    private EventBus mailEventBus;
+
+    /**
+     * Indexing handler.
+     */
+    private IndexingHandler indexingHandler;
+
+    /**
+     * Inbox scanning service.
+     */
+    private InboxService inboxService;
+
+    /**
+     * File service.
+     */
+    private FileService fileService;
+
+    /**
+     * Asynchronous executors.
+     */
+    private List&lt;ThreadPoolExecutor&gt; asyncExecutorList;
+
+    /**
+     * Start the application context.
+     */
+    private void startUp() {
+<span class="fc" id="L77">        resetEventBus();</span>
+
+        // Start indexing handler
+        try {
+<span class="fc" id="L81">            List&lt;Class&lt;? extends IndexingHandler&gt;&gt; indexingHandlerList = Lists.newArrayList(</span>
+<span class="fc" id="L82">                    new ClasspathScanner&lt;IndexingHandler&gt;().findClasses(IndexingHandler.class, &quot;com.sismics.docs.core.util.indexing&quot;));</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">            for (Class&lt;? extends IndexingHandler&gt; handlerClass : indexingHandlerList) {</span>
+<span class="fc" id="L84">                IndexingHandler handler = handlerClass.getDeclaredConstructor().newInstance();</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">                if (handler.accept()) {</span>
+<span class="fc" id="L86">                    indexingHandler = handler;</span>
+<span class="fc" id="L87">                    break;</span>
+                }
+            }
+<span class="fc" id="L90">            indexingHandler.startUp();</span>
+<span class="pc" id="L91">        } catch (Exception e) {</span>
+<span class="nc" id="L92">            log.error(&quot;Error starting the indexing handler&quot;, e);</span>
+        }
+
+        // Start file service
+<span class="fc" id="L96">        fileService = new FileService();</span>
+<span class="fc" id="L97">        fileService.startAsync();</span>
+<span class="fc" id="L98">        fileService.awaitRunning();</span>
+
+        // Start inbox service
+<span class="fc" id="L101">        inboxService = new InboxService();</span>
+<span class="fc" id="L102">        inboxService.startAsync();</span>
+<span class="fc" id="L103">        inboxService.awaitRunning();</span>
+
+        // Register fonts
+<span class="fc" id="L106">        PdfUtil.registerFonts();</span>
+
+        // Change the admin password if needed
+<span class="fc" id="L109">        String envAdminPassword = System.getenv(Constants.ADMIN_PASSWORD_INIT_ENV);</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (!Strings.isNullOrEmpty(envAdminPassword)) {</span>
+<span class="nc" id="L111">            UserDao userDao = new UserDao();</span>
+<span class="nc" id="L112">            User adminUser = userDao.getById(&quot;admin&quot;);</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if (Constants.DEFAULT_ADMIN_PASSWORD.equals(adminUser.getPassword())) {</span>
+<span class="nc" id="L114">                adminUser.setPassword(envAdminPassword);</span>
+<span class="nc" id="L115">                userDao.updateHashedPassword(adminUser);</span>
+            }
+        }
+
+        // Change the admin email if needed
+<span class="fc" id="L120">        String envAdminEmail = System.getenv(Constants.ADMIN_EMAIL_INIT_ENV);</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        if (!Strings.isNullOrEmpty(envAdminEmail)) {</span>
+<span class="nc" id="L122">            UserDao userDao = new UserDao();</span>
+<span class="nc" id="L123">            User adminUser = userDao.getById(&quot;admin&quot;);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">            if (Constants.DEFAULT_ADMIN_EMAIL.equals(adminUser.getEmail())) {</span>
+<span class="nc" id="L125">                adminUser.setEmail(envAdminEmail);</span>
+<span class="nc" id="L126">                userDao.update(adminUser, &quot;admin&quot;);</span>
+            }
+        }
+<span class="fc" id="L129">    }</span>
+
+    /**
+     * (Re)-initializes the event buses.
+     */
+    private void resetEventBus() {
+<span class="fc" id="L135">        asyncExecutorList = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L137">        asyncEventBus = newAsyncEventBus();</span>
+<span class="fc" id="L138">        asyncEventBus.register(new FileProcessingAsyncListener());</span>
+<span class="fc" id="L139">        asyncEventBus.register(new FileDeletedAsyncListener());</span>
+<span class="fc" id="L140">        asyncEventBus.register(new DocumentCreatedAsyncListener());</span>
+<span class="fc" id="L141">        asyncEventBus.register(new DocumentUpdatedAsyncListener());</span>
+<span class="fc" id="L142">        asyncEventBus.register(new DocumentDeletedAsyncListener());</span>
+<span class="fc" id="L143">        asyncEventBus.register(new RebuildIndexAsyncListener());</span>
+<span class="fc" id="L144">        asyncEventBus.register(new AclCreatedAsyncListener());</span>
+<span class="fc" id="L145">        asyncEventBus.register(new AclDeletedAsyncListener());</span>
+<span class="fc" id="L146">        asyncEventBus.register(new WebhookAsyncListener());</span>
+
+<span class="fc" id="L148">        mailEventBus = newAsyncEventBus();</span>
+<span class="fc" id="L149">        mailEventBus.register(new PasswordLostAsyncListener());</span>
+<span class="fc" id="L150">        mailEventBus.register(new RouteStepValidateAsyncListener());</span>
+<span class="fc" id="L151">    }</span>
+
+    /**
+     * Returns a single instance of the application context.
+     *
+     * @return Application context
+     */
+    public static AppContext getInstance() {
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        if (instance == null) {</span>
+<span class="fc" id="L160">            instance = new AppContext();</span>
+<span class="fc" id="L161">            instance.startUp();</span>
+        }
+<span class="fc" id="L163">        return instance;</span>
+    }
+
+    /**
+     * Creates a new asynchronous event bus.
+     *
+     * @return Async event bus
+     */
+    private EventBus newAsyncEventBus() {
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (EnvironmentUtil.isUnitTest()) {</span>
+<span class="fc" id="L173">            return new EventBus();</span>
+        } else {
+<span class="nc" id="L175">            int threadCount = Math.max(Runtime.getRuntime().availableProcessors() / 2, 2);</span>
+<span class="nc" id="L176">            ThreadPoolExecutor executor = new ThreadPoolExecutor(threadCount, threadCount,</span>
+<span class="nc" id="L177">                    1L, TimeUnit.MINUTES,</span>
+<span class="nc" id="L178">                    new LinkedBlockingQueue&lt;&gt;());</span>
+<span class="nc" id="L179">            asyncExecutorList.add(executor);</span>
+<span class="nc" id="L180">            return new AsyncEventBus(executor);</span>
+        }
+    }
+
+    /**
+     * Return the current number of queued tasks waiting to be processed.
+     *
+     * @return Number of queued tasks
+     */
+    public int getQueuedTaskCount() {
+<span class="nc" id="L190">        int queueSize = 0;</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        for (ThreadPoolExecutor executor : asyncExecutorList) {</span>
+<span class="nc" id="L192">            queueSize += executor.getTaskCount() - executor.getCompletedTaskCount();</span>
+        }
+<span class="nc" id="L194">        return queueSize;</span>
+    }
+
+    public EventBus getAsyncEventBus() {
+<span class="nc" id="L198">        return asyncEventBus;</span>
+    }
+
+    public EventBus getMailEventBus() {
+<span class="nc" id="L202">        return mailEventBus;</span>
+    }
+
+    public IndexingHandler getIndexingHandler() {
+<span class="nc" id="L206">        return indexingHandler;</span>
+    }
+
+    public InboxService getInboxService() {
+<span class="nc" id="L210">        return inboxService;</span>
+    }
+
+    public FileService getFileService() {
+<span class="fc" id="L214">        return fileService;</span>
+    }
+
+    public void shutDown() {
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        for (ExecutorService executor : asyncExecutorList) {</span>
+            // Shutdown executor, don't accept any more tasks (can cause error with nested events)
+            try {
+<span class="nc" id="L221">                executor.shutdown();</span>
+<span class="nc" id="L222">                executor.awaitTermination(1, TimeUnit.MINUTES);</span>
+<span class="nc" id="L223">            } catch (InterruptedException e) {</span>
+                // NOP
+            }
+        }
+
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (indexingHandler != null) {</span>
+<span class="nc" id="L229">            indexingHandler.shutDown();</span>
+        }
+
+<span class="nc bnc" id="L232" title="All 2 branches missed.">        if (inboxService != null) {</span>
+<span class="nc" id="L233">            inboxService.stopAsync();</span>
+<span class="nc" id="L234">            inboxService.awaitTerminated();</span>
+        }
+
+<span class="nc bnc" id="L237" title="All 2 branches missed.">        if (fileService != null) {</span>
+<span class="nc" id="L238">            fileService.stopAsync();</span>
+        }
+
+<span class="nc" id="L241">        instance = null;</span>
+<span class="nc" id="L242">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.55.0" timestamp="2024-04-10T14:33:31.892">
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/dao/GroupDao.java">
+<violation beginline="162" endline="223" begincolumn="12" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.dao" class="GroupDao" method="findByCriteria" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'findByCriteria(GroupCriteria, SortCriteria)' has a cyclomatic complexity of 11.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/service/InboxService.java">
+<violation beginline="195" endline="271" begincolumn="13" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.service" class="InboxService" method="importMessage" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'importMessage(Message, Map)' has a cyclomatic complexity of 12.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/util/DirectoryUtil.java">
+<violation beginline="23" endline="51" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util" class="DirectoryUtil" method="getBaseDataDirectory" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'getBaseDataDirectory()' has a cyclomatic complexity of 10.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/util/FileUtil.java">
+<violation beginline="117" endline="212" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util" class="FileUtil" method="createFile" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'createFile(String, String, Path, long, String, String, String)' has a cyclomatic complexity of 15.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/util/MetadataUtil.java">
+<violation beginline="33" endline="84" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util" class="MetadataUtil" method="updateMetadata" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'updateMetadata(String, List, List)' has a cyclomatic complexity of 14.
+</violation>
+<violation beginline="93" endline="120" begincolumn="20" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util" class="MetadataUtil" method="validateValue" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'validateValue(MetadataType, String)' has a cyclomatic complexity of 12.
+</violation>
+<violation beginline="158" endline="195" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util" class="MetadataUtil" method="addMetadata" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'addMetadata(JsonObjectBuilder, String)' has a cyclomatic complexity of 10.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/util/PdfUtil.java">
+<violation beginline="52" endline="119" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util" class="PdfUtil" method="convertToPdf" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'convertToPdf(DocumentDto, List, boolean, boolean, int, OutputStream)' has a cyclomatic complexity of 12.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/util/TransactionUtil.java">
+<violation beginline="27" endline="86" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util" class="TransactionUtil" method="handle" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'handle(Runnable)' has a cyclomatic complexity of 13.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/docs/core/util/indexing/LuceneIndexingHandler.java">
+<violation beginline="60" endline="620" begincolumn="8" endcolumn="1" rule="GodClass" ruleset="Design" package="com.sismics.docs.core.util.indexing" class="LuceneIndexingHandler" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#godclass" priority="3">
+Possible God Class (WMC=90, ATFD=167, TCC=25.108%)
+</violation>
+<violation beginline="60" endline="620" begincolumn="8" endcolumn="1" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util.indexing" class="LuceneIndexingHandler" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'LuceneIndexingHandler' has a total cyclomatic complexity of 90 (highest 28).
+</violation>
+<violation beginline="238" endline="382" begincolumn="12" endcolumn="5" rule="NcssCount" ruleset="Design" package="com.sismics.docs.core.util.indexing" class="LuceneIndexingHandler" method="findByCriteria" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'findByCriteria(PaginatedList, List, DocumentCriteria, SortCriteria)' has a NCSS line count of 105.
+</violation>
+<violation beginline="238" endline="382" begincolumn="12" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util.indexing" class="LuceneIndexingHandler" method="findByCriteria" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'findByCriteria(PaginatedList, List, DocumentCriteria, SortCriteria)' has a cyclomatic complexity of 28.
+</violation>
+<violation beginline="497" endline="531" begincolumn="13" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.docs.core.util.indexing" class="LuceneIndexingHandler" method="getDocumentFromDocument" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'getDocumentFromDocument(Document)' has a cyclomatic complexity of 10.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/util/EmailUtil.java">
+<violation beginline="83" endline="169" begincolumn="20" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.util" class="EmailUtil" method="sendEmail" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'sendEmail(String, UserDto, String, Map)' has a cyclomatic complexity of 13.
+</violation>
+<violation beginline="193" endline="233" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.util" class="EmailUtil" method="parseMailContent" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'parseMailContent(Part, MailContent)' has a cyclomatic complexity of 10.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/util/ResourceUtil.java">
+<violation beginline="34" endline="89" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.util" class="ResourceUtil" method="list" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'list(Class, String, FilenameFilter)' has a cyclomatic complexity of 14.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/util/jpa/DbOpenHelper.java">
+<violation beginline="56" endline="125" begincolumn="12" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.util.jpa" class="DbOpenHelper" method="open" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'open()' has a cyclomatic complexity of 11.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/util/log4j/MemoryAppender.java">
+<violation beginline="101" endline="128" begincolumn="12" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.util.log4j" class="MemoryAppender" method="find" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'find(LogCriteria, PaginatedList)' has a cyclomatic complexity of 10.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/com/sismics/util/mime/MimeTypeUtil.java">
+<violation beginline="42" endline="69" begincolumn="19" endcolumn="5" rule="CyclomaticComplexity" ruleset="Design" package="com.sismics.util.mime" class="MimeTypeUtil" method="getFileExtension" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'getFileExtension(String)' has a cyclomatic complexity of 12.
+</violation>
+</file>
+<file name="/home/tang-12110502/Teedy/docs-core/src/main/java/org/apache/pdfbox/pdmodel/font/DocsPDType1Font.java">
+<violation beginline="31" endline="319" begincolumn="8" endcolumn="1" rule="GodClass" ruleset="Design" package="org.apache.pdfbox.pdmodel.font" class="DocsPDType1Font" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#godclass" priority="3">
+Possible God Class (WMC=58, ATFD=39, TCC=32.026%)
+</violation>
+</file>
+</pmd>

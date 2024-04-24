@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TagUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Docs Core</a> &gt; <a href="index.source.html" class="el_package">com.sismics.docs.core.util</a> &gt; <span class="el_source">TagUtil.java</span></div><h1>TagUtil.java</h1><pre class="source lang-java linenums">package com.sismics.docs.core.util;
+
+import com.sismics.docs.core.dao.dto.TagDto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Tag utilities.
+ *
+ * @author bgamard
+ */
+<span class="nc" id="L13">public class TagUtil {</span>
+    /**
+     * Recursively find children of a tag.
+     *
+     * @param parentTagDto Parent tag
+     * @param allTagDtoList List of all tags
+     * @return Children tags
+     */
+    public static List&lt;TagDto&gt; findChildren(TagDto parentTagDto, List&lt;TagDto&gt; allTagDtoList) {
+<span class="nc" id="L22">        List&lt;TagDto&gt; childrenTagDtoList = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        for (TagDto tagDto : allTagDtoList) {</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">            if (parentTagDto.getId().equals(tagDto.getParentId())) {</span>
+<span class="nc" id="L26">                childrenTagDtoList.add(tagDto);</span>
+<span class="nc" id="L27">                childrenTagDtoList.addAll(findChildren(tagDto, allTagDtoList));</span>
+            }
+        }
+
+<span class="nc" id="L31">        return childrenTagDtoList;</span>
+    }
+
+    /**
+     * Find tags by name (start with, ignore case).
+     *
+     * @param name Name
+     * @param allTagDtoList List of all tags
+     * @return List of filtered tags
+     */
+    public static List&lt;TagDto&gt; findByName(String name, List&lt;TagDto&gt; allTagDtoList) {
+<span class="nc" id="L42">        List&lt;TagDto&gt; tagDtoList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (name.isEmpty()) {</span>
+<span class="nc" id="L44">            return tagDtoList;</span>
+        }
+<span class="nc" id="L46">        name = name.toLowerCase();</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for (TagDto tagDto : allTagDtoList) {</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (tagDto.getName().toLowerCase().startsWith(name)) {</span>
+<span class="nc" id="L49">                tagDtoList.add(tagDto);</span>
+            }
+        }
+<span class="nc" id="L52">        return tagDtoList;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

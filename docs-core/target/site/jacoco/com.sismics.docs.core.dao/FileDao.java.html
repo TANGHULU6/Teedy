@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Docs Core</a> &gt; <a href="index.source.html" class="el_package">com.sismics.docs.core.dao</a> &gt; <span class="el_source">FileDao.java</span></div><h1>FileDao.java</h1><pre class="source lang-java linenums">package com.sismics.docs.core.dao;
+
+import com.sismics.docs.core.constant.AuditLogType;
+import com.sismics.docs.core.model.jpa.File;
+import com.sismics.docs.core.util.AuditLogUtil;
+import com.sismics.util.context.ThreadLocalContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+/**
+ * File DAO.
+ * 
+ * @author bgamard
+ */
+<span class="nc" id="L21">public class FileDao {</span>
+    /**
+     * Creates a new file.
+     * 
+     * @param file File
+     * @param userId User ID
+     * @return New ID
+     */
+    public String create(File file, String userId) {
+        // Create the UUID
+<span class="nc" id="L31">        file.setId(UUID.randomUUID().toString());</span>
+        
+        // Create the file
+<span class="nc" id="L34">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L35">        file.setCreateDate(new Date());</span>
+<span class="nc" id="L36">        em.persist(file);</span>
+        
+        // Create audit log
+<span class="nc" id="L39">        AuditLogUtil.create(file, AuditLogType.CREATE, userId);</span>
+        
+<span class="nc" id="L41">        return file.getId();</span>
+    }
+    
+    /**
+     * Returns the list of all files.
+     *
+     * @param offset Offset
+     * @param limit Limit
+     * @return List of files
+     */
+    public List&lt;File&gt; findAll(int offset, int limit) {
+<span class="nc" id="L52">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L53">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.deleteDate is null&quot;, File.class);</span>
+<span class="nc" id="L54">        q.setFirstResult(offset);</span>
+<span class="nc" id="L55">        q.setMaxResults(limit);</span>
+<span class="nc" id="L56">        return q.getResultList();</span>
+    }
+    
+    /**
+     * Returns the list of all files from a user.
+     * 
+     * @param userId User ID
+     * @return List of files
+     */
+    public List&lt;File&gt; findByUserId(String userId) {
+<span class="nc" id="L66">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L67">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.userId = :userId and f.deleteDate is null&quot;, File.class);</span>
+<span class="nc" id="L68">        q.setParameter(&quot;userId&quot;, userId);</span>
+<span class="nc" id="L69">        return q.getResultList();</span>
+    }
+
+    /**
+     * Returns a list of active files.
+     *
+     * @param ids Files IDs
+     * @return List of files
+     */
+    public List&lt;File&gt; getFiles(List&lt;String&gt; ids) {
+<span class="nc" id="L79">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L80">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.id in :ids and f.deleteDate is null&quot;, File.class);</span>
+<span class="nc" id="L81">        q.setParameter(&quot;ids&quot;, ids);</span>
+<span class="nc" id="L82">        return q.getResultList();</span>
+    }
+    
+    /**
+     * Returns an active file or null.
+     * 
+     * @param id File ID
+     * @return File
+     */
+    public File getFile(String id) {
+<span class="nc" id="L92">        List&lt;File&gt; files = getFiles(List.of(id));</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (files.isEmpty()) {</span>
+<span class="nc" id="L94">            return null;</span>
+        } else {
+<span class="nc" id="L96">            return files.get(0);</span>
+        }
+    }
+    
+    /**
+     * Returns an active file.
+     * 
+     * @param id File ID
+     * @param userId User ID
+     * @return File
+     */
+    public File getFile(String id, String userId) {
+<span class="nc" id="L108">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L109">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.id = :id and f.userId = :userId and f.deleteDate is null&quot;, File.class);</span>
+<span class="nc" id="L110">        q.setParameter(&quot;id&quot;, id);</span>
+<span class="nc" id="L111">        q.setParameter(&quot;userId&quot;, userId);</span>
+        try {
+<span class="nc" id="L113">            return q.getSingleResult();</span>
+<span class="nc" id="L114">        } catch (NoResultException e) {</span>
+<span class="nc" id="L115">            return null;</span>
+        }
+    }
+    
+    /**
+     * Deletes a file.
+     * 
+     * @param id File ID
+     * @param userId User ID
+     */
+    public void delete(String id, String userId) {
+<span class="nc" id="L126">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+            
+        // Get the file
+<span class="nc" id="L129">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.id = :id and f.deleteDate is null&quot;, File.class);</span>
+<span class="nc" id="L130">        q.setParameter(&quot;id&quot;, id);</span>
+<span class="nc" id="L131">        File fileDb = q.getSingleResult();</span>
+        
+        // Delete the file
+<span class="nc" id="L134">        Date dateNow = new Date();</span>
+<span class="nc" id="L135">        fileDb.setDeleteDate(dateNow);</span>
+        
+        // Create audit log
+<span class="nc" id="L138">        AuditLogUtil.create(fileDb, AuditLogType.DELETE, userId);</span>
+<span class="nc" id="L139">    }</span>
+    
+    /**
+     * Update a file.
+     * 
+     * @param file File to update
+     * @return Updated file
+     */
+    public File update(File file) {
+<span class="nc" id="L148">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+        
+        // Get the file
+<span class="nc" id="L151">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.id = :id and f.deleteDate is null&quot;, File.class);</span>
+<span class="nc" id="L152">        q.setParameter(&quot;id&quot;, file.getId());</span>
+<span class="nc" id="L153">        File fileDb = q.getSingleResult();</span>
+
+        // Update the file
+<span class="nc" id="L156">        fileDb.setDocumentId(file.getDocumentId());</span>
+<span class="nc" id="L157">        fileDb.setName(file.getName());</span>
+<span class="nc" id="L158">        fileDb.setContent(file.getContent());</span>
+<span class="nc" id="L159">        fileDb.setOrder(file.getOrder());</span>
+<span class="nc" id="L160">        fileDb.setMimeType(file.getMimeType());</span>
+<span class="nc" id="L161">        fileDb.setVersionId(file.getVersionId());</span>
+<span class="nc" id="L162">        fileDb.setLatestVersion(file.isLatestVersion());</span>
+
+<span class="nc" id="L164">        return file;</span>
+    }
+
+    /**
+     * Gets a file by its ID.
+     * 
+     * @param id File ID
+     * @return File
+     */
+    public File getActiveById(String id) {
+<span class="nc" id="L174">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L175">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.id = :id and f.deleteDate is null&quot;, File.class);</span>
+<span class="nc" id="L176">        q.setParameter(&quot;id&quot;, id);</span>
+        try {
+<span class="nc" id="L178">            return q.getSingleResult();</span>
+<span class="nc" id="L179">        } catch (NoResultException e) {</span>
+<span class="nc" id="L180">            return null;</span>
+        }
+    }
+    
+    /**
+     * Get files by document ID or all orphan files of a user.
+     * 
+     * @param userId User ID
+     * @param documentId Document ID
+     * @return List of files
+     */
+    public List&lt;File&gt; getByDocumentId(String userId, String documentId) {
+<span class="nc" id="L192">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">        if (documentId == null) {</span>
+<span class="nc" id="L194">            TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.documentId is null and f.deleteDate is null and f.latestVersion = true and f.userId = :userId order by f.createDate asc&quot;, File.class);</span>
+<span class="nc" id="L195">            q.setParameter(&quot;userId&quot;, userId);</span>
+<span class="nc" id="L196">            return q.getResultList();</span>
+        } else {
+<span class="nc" id="L198">            return getByDocumentsIds(Collections.singleton(documentId));</span>
+        }
+    }
+
+    /**
+     * Get files by documents IDs.
+     *
+     * @param documentIds Documents IDs
+     * @return List of files
+     */
+    public List&lt;File&gt; getByDocumentsIds(Iterable&lt;String&gt; documentIds) {
+<span class="nc" id="L209">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L210">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.documentId in :documentIds and f.latestVersion = true and f.deleteDate is null order by f.order asc&quot;, File.class);</span>
+<span class="nc" id="L211">        q.setParameter(&quot;documentIds&quot;, documentIds);</span>
+<span class="nc" id="L212">        return q.getResultList();</span>
+    }
+
+    /**
+     * Get all files from a version.
+     *
+     * @param versionId Version ID
+     * @return List of files
+     */
+    public List&lt;File&gt; getByVersionId(String versionId) {
+<span class="nc" id="L222">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L223">        TypedQuery&lt;File&gt; q = em.createQuery(&quot;select f from File f where f.versionId = :versionId and f.deleteDate is null order by f.order asc&quot;, File.class);</span>
+<span class="nc" id="L224">        q.setParameter(&quot;versionId&quot;, versionId);</span>
+<span class="nc" id="L225">        return q.getResultList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

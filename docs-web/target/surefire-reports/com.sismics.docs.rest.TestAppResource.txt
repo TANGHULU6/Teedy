@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.sismics.docs.rest.TestAppResource
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.276 s - in com.sismics.docs.rest.TestAppResource

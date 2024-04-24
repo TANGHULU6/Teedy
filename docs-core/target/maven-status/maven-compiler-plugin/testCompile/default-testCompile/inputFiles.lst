@@ -1,0 +1,10 @@
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/docs/BaseTransactionalTest.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/util/TestResourceUtil.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/docs/core/dao/jpa/TestJpa.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/docs/core/util/TestFileUtil.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/util/TestMimeTypeUtil.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/util/format/TestPdfFormatHandler.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/util/TestImageUtil.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/util/TestCss.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/util/TestGoogleAuthenticator.java
+/home/tang-12110502/Teedy/docs-core/src/test/java/com/sismics/docs/core/util/TestEncryptUtil.java
