@@ -6,11 +6,24 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
+        stage('Generate Javadoc') {
+            steps {
+                // 生成 Javadoc 文档
+                sh 'mvn javadoc:javadoc'
+            }
+        }
         stage('pmd') {
             steps {
                 sh 'mvn pmd:pmd'
             }
         }
+        stage('Test report') {
+            steps {
+                // 运行测试并生成 Surefire 报告
+                sh 'mvn test'
+            }
+        }
+        
     }
 
     post {
